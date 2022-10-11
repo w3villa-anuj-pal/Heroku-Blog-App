@@ -1,0 +1,25 @@
+<% @blogs.each do |blog| %>
+  <div class="row justify-content-md-center">
+    <div class="col-8 mt-4">
+      <div class="card text-center shadow mb-5 bg-body rounded">
+        <div class="card-header text-success">
+          By <%= blog.user.username %>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title"><%= link_to blog.title ,blog ,class: "text-success rails-link" %></h5>
+          <p class="card-text"><%= truncate(blog.description , length:120) %></p>
+          <%= link_to 'View' , blog , class: " btn btn-outline-primary" %>
+          <% if logged_in? && (blog.user == current_user || current_user.admin?) %>
+            <%= link_to 'Edit' , edit_blog_path(blog) , class: " btn btn-outline-success" %>
+            <%= link_to 'Delete' , blog ,method: :delete, data: { confirm: 'Are you sure?' } , class: " btn btn-outline-danger" %>
+          <% end %>
+        </div>
+        <div class="card-footer text-muted">
+          <small> Created <%= time_ago_in_words(blog.created_at)%> ,
+                  Edited  <%= time_ago_in_words(blog.updated_at)%>
+          </small>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

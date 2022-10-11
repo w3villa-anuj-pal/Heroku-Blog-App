@@ -1,0 +1,27 @@
+<div class="row justify-content-center">
+  <div class="col-10">
+    <%= render 'shared/error' ,obj: @blog %>
+    <%= form_with(model: @blog, class: "shadow p-3 mb-3 bg-info rounded", local: true) do |f| %>
+      <div class="form-group row">
+        <%= f.label :title, class: "col-2 col-form-label text-dark" %>
+        <div class="col-10">
+          <%= f.text_field :title, class: "form-control shadow rounded m-1", placeholder: "Title of blog" %>
+        </div>
+      </div>
+      <div class="form-group row">
+        <%= f.label :description, class: "col-2 col-form-label text-dark" %>
+        <div class="col-10">
+          <%= f.text_area :description, rows: 10, class: "form-control shadow rounded m-1", placeholder: "Description of blog" %>
+        </div>
+      </div>
+      <div class=" m-4 d-flex justify-content-center">
+        <%= f.collection_select(:category_id, Category.all, :id, :name,prompt: "Please Select Category") %>
+      </div>
+      <div class=" mt-2 d-flex justify-content-center">
+        <%= f.submit class: " justify-content-center btn btn-outline-light btn-lg" %>
+      </div>
+    <% end %>
+  </div>
+  <%= link_to 'Back',blogs_path, class:"text-center text-danger nav-link" %>
+</div>
+</div>

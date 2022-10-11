@@ -1,0 +1,9 @@
+<div class ="page-content">
+  <div class = "container">
+    <h1 class = "text-center pt-4">Listing all Blog</h1>
+    <p id="notice" class="text-center text-danger fw-bold"><%= notice %></p>
+    <%= render 'shared/blog' %>
+    <%== pagy_nav(@pagy) %>
+  </div>
+</div>
+

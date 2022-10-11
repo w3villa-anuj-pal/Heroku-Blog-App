@@ -1,0 +1,14 @@
+<div class = "page-content">
+  <p id="notice" class="text-center text-success pt-4 fw-bold"><%= notice %></p>
+  <h1 class="text-center pt-4"><%= @user.username %>'s profile</h1>
+  <h3 class="text-center mt-4">Blog's</h3>
+  <% if logged_in? && (@user == current_user || current_user.admin?) %>
+    <div class="text-center mt-4">
+      <% if logged_in? && (@user == current_user || current_user.admin?) %>
+        <%= link_to "Edit Profile", edit_user_path(@user), class: "btn btn-outline-success" %>
+        <%= link_to "Delete Profile", user_path(@user), class: "btn btn-outline-danger", method: :delete, data: {confirm: "Are you sure?"} %>
+      <% end %>
+    </div>
+  <% end %>
+  <%= render 'shared/blog' %>
+</div> 

@@ -1,0 +1,28 @@
+<div class = "page-content">
+  <h2 class="text-center pt-4"><%= @blog.title %></h2>
+  <p id="notice" class="text-center text-success fw-bold"><%= notice %></p>
+  <div class="container">
+    <div class="row justify-content-md-center">
+      <div class="col-8 mt-4">
+          <div class="card text-center shadow mb-5 bg-white rounded">
+            <div class="card-header font-italic rails-link text-success ">
+              By <%= @blog.user.username  if @blog.user %>
+            </div>
+            <div class="card-body">
+              <div class="card-text text-left"><%= simple_format(@blog.description) %></div>
+              <%= link_to "Back", blogs_path, class: "btn btn-outline-primary" %>
+               <% if logged_in? && (@blog.user == current_user || current_user.admin?) %>
+                <%= link_to "Edit", edit_blog_path(@blog), class: "btn btn-outline-success" %>
+                <%= link_to "Delete", blog_path(@blog), class: "btn btn-outline-danger", method: :delete, data: {confirm: "Are you sure?"} %>
+              <% end %>
+            </div>
+            <div class="card-footer text-muted">
+              <small>Created <%= time_ago_in_words(@blog.created_at) %> ago, 
+              edited <%= time_ago_in_words(@blog.updated_at) %> ago</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

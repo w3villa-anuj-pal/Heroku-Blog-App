@@ -1,0 +1,32 @@
+<div class ="page-content">
+  <div class = "container">
+    <h1 class = "text-center pt-4">Listing all Category</h1>
+    <p id="notice" class="text-center text-danger fw-bold"><%= notice %></p>
+    <% @categories.each do |category| %>
+      <div class="row justify-content-md-center">
+        <div class="col-8 mt-4">
+          <div class="card text-center shadow mb-5 bg-body rounded">
+            <div class="card-header text-success">
+              By Anuj
+            </div>
+            <div class="card-body">
+              <h5 class="card-title"><%= link_to category.name.capitalize ,category ,class: "text-success rails-link" %></h5>
+              <%= link_to 'View' , category , class: " btn btn-outline-primary" %>
+              <% if logged_in? && current_user.admin? %>
+                <%= link_to 'Edit' , edit_category_path(category) , class: " btn btn-outline-success" %>
+                <%= link_to 'Delete' , category ,method: :delete, data: { confirm: 'Are you sure?' } , class: " btn btn-outline-danger" %>
+              <% end %>
+            </div>
+            <div class="card-footer text-muted">
+              <small> Created <%= time_ago_in_words(category.created_at)%> ,
+                Edited  <%= time_ago_in_words(category.updated_at)%> ,
+                Blog  <%= category.blogs.count %>
+              </small>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+    <%== pagy_nav(@pagy) %>
+  </div>
+</div>
